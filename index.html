@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:300,regular,500,700&display=swap&subset=cyrillic-ext" rel="stylesheet" />
+  <script
+      src="https://code.jquery.com/jquery-3.6.1.js"
+      integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI="
+      crossorigin="anonymous">
+  </script>
+      <link rel="stylesheet" href="css/style.css">
+      <title>Vaidate Form</title>
+</head>
+<body>
+  <div class="container">
+    <form action="#" class="form__block">
+      <div class="input__block">
+        <h3 class="title">Registration</h3>
+      </div>
+      
+      <div class="input__block">
+        <p>Email*:</p>
+        <input class="input input-mail" type="text" placeholder="Enter Email"/>
+      </div>
+      
+      <div class="input__block">
+        <p>Password*:</p>
+        <input class="input input-pass" type="password" placeholder="Enter Password"/>
+      </div>
+      <div class="input__block">
+        <input type="checkbox" class="imput__checkbox">
+        <label class="checkbox__label" for="privacy_check">Accept privacy policy</label>
+        
+      </div>
+      <div class="input__block ">
+        <div class="imput__check">1</div>
+        <button class="sign-up__button" id="signup" type="submit">sign up</button>
+      </div>
+
+      <div class="login__block login__register">
+        <div class="login__text">Have already an account?</div>
+        <a href="login.html" class="login__link">Login Here</a>
+      </div>
+    </form>
+  </div>
+  <script src="js/main.js"></script>
+  <script src="js/formVaidator.js"></script>
+</body>
+</html>
