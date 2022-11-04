@@ -1,5 +1,6 @@
-let form = document.querySelector('.form__block'),
-    formInputs = document.querySelectorAll('.input'),
+import {addUser} from './main.js'
+
+let siqnupForm = document.querySelector('#siqnupForm'),
     mailInput = document.querySelector('.input-mail'),
     checkboxInput = document.querySelector('.imput__checkbox'),
     checkImputMessage = document.querySelector('.imput__check'),
@@ -18,9 +19,26 @@ function validateCountryRU(email){
 }
 //#endregion
 
-form.onsubmit = function(){
+function getSignUpFormValues(event){
+    event.preventDefault();
+
+    const mail = siqnupForm.querySelector('[name="mail"]'),
+        pass = siqnupForm.querySelector('[name="pass"]');
+
+    const values = {
+        mail: mail.value,
+        pass: pass.value
+    }    
+
+    validator(siqnupForm, values);
+}
+
+siqnupForm.addEventListener('submit', getSignUpFormValues);
+
+function validator(form, object){
     let mailValue = mailInput.value,
         passValue = passwordInput.value,
+        formInputs = form.querySelectorAll('.input'),
         NullImputs = Array.from(formInputs).filter(input => input.value === ''); 
 
     formInputs.forEach(function (input) {
@@ -32,6 +50,8 @@ form.onsubmit = function(){
         }
     });
 
+    checkImputMessage.classList.remove('_ok');
+
     if(NullImputs.length !== 0){
         checkImputMessage.innerText = '!!! not all fields are filled:';
         checkImputMessage.classList.add('_visible');
@@ -39,6 +59,7 @@ form.onsubmit = function(){
     }
     else{
         checkImputMessage.classList.remove('_visible');
+        
     }
     
     if(!validateEmail(mailValue)){
@@ -70,6 +91,12 @@ form.onsubmit = function(){
         mailInput.classList.remove('_error');      
         checkImputMessage.classList.remove('_visible');
     }
+
+    addUser(object.mail, object.pass);
+    mailInput.value = '';
+    passwordInput.value = '';S
+    checkImputMessage.classList.add('_ok');
+    checkImputMessage.innerText = 'Registrarion successful:';
 };
 
 

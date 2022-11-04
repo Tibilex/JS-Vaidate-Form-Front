@@ -52,6 +52,11 @@ h3 {
   opacity: 1;
 }
 
+.imput__check._ok {
+  opacity: 1;
+  color: #8fbc8f;
+}
+
 .input {
   width: 100%;
   height: 40px;

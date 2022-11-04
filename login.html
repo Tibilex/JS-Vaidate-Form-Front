@@ -15,24 +15,24 @@
 </head>
 <body>
     <div class="container">
-        <form action="#" class="form__block">
+        <form action="#" id="signinForm" class="form__block">
           <div class="input__block">
             <h3 class="title">Sign In</h3>
           </div>
           
           <div class="input__block">
             <p>Email*:</p>
-            <input class="input input-mail" type="text" placeholder="Enter Email"/>
+            <input class="input input-mail" name="mail" type="text" placeholder="Enter Email"/>
           </div>
           
           <div class="input__block">
             <p>Password*:</p>
-            <input class="input input-pass" type="password" placeholder="Enter Password"/>
+            <input class="input input-pass" name="pass" type="password" placeholder="Enter Password"/>
           </div>
          
           <div class="input__block ">
             <div class="imput__check">1</div>
-            <button class="sign-up__button" id="signin" type="submit">sign in</button>
+            <button class="sign-up__button" data-type="signin" id="signin" type="submit">sign in</button>
         </div>
         <div class="block__input">
             <a href="resetpass.html" class="imput__forgot">Forgot Password?</a>
@@ -44,7 +44,6 @@
           </div>
         </form>
       </div>
-      <script src="js/main.js"></script>
-      <script src="js/formVaidator.js"></script>
+      <script type="module" src="js/signInValidator.js"></script>
 </body>
 </html>

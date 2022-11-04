@@ -15,24 +15,24 @@
 </head>
 <body>
     <div class="container">
-        <form action="#" class="form__block">
+        <form action="#" id="resetForm" class="form__block">
           <div class="input__block">
             <h3 class="title">reset password</h3>
           </div>
           
           <div class="input__block">
-            <p>NEW Email*:</p>
-            <input class="input input-mail" type="text" placeholder="Enter Email"/>
+            <p>You Email*:</p>
+            <input class="input input-mail" name="mail" type="text" placeholder="Enter Email"/>
           </div>
           
           <div class="input__block">
             <p>NEW Password*:</p>
-            <input class="input input-pass" type="password" placeholder="Enter Password"/>
+            <input class="input input-pass" name="pass" type="password" placeholder="Enter Password"/>
           </div>
          
           <div class="input__block ">
             <div class="imput__check">1</div>
-            <button class="sign-up__button" id="reset" type="submit">RESET</button>
+            <button class="sign-up__button" data-type="resset" id="reset" type="submit">RESET</button>
         </div>
     
           <div class="login__block login__back">
@@ -40,7 +40,6 @@
           </div>
         </form>
       </div>
-      <script src="js/main.js"></script>
-      <script src="js/formVaidator.js"></script>
+      <script type="module" src="js/resetValidator.js"></script>
 </body>
 </html>
