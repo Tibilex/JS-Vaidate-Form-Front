@@ -4,7 +4,8 @@ let siqnupForm = document.querySelector('#siqnupForm'),
     mailInput = document.querySelector('.input-mail'),
     checkboxInput = document.querySelector('.imput__checkbox'),
     checkImputMessage = document.querySelector('.imput__check'),
-    passwordInput = document.querySelector('.input-pass');
+    passwordInput = document.querySelector('.input-pass'),
+    mailcheck;
 
 //#region validation patterns
 
@@ -91,12 +92,35 @@ function validator(form, object){
         mailInput.classList.remove('_error');      
         checkImputMessage.classList.remove('_visible');
     }
+    checkImputMessage.classList.remove('_ok');
+    checkImputMessage.classList.remove('_visible');
 
-    addUser(object.mail, object.pass);
-    mailInput.value = '';
-    passwordInput.value = '';S
-    checkImputMessage.classList.add('_ok');
-    checkImputMessage.innerText = 'Registrarion successful:';
+    $.get("https://localhost:7180/Admin/GetToMail?mail=" + object.mail,{
+    }).done(function(data) {
+        mailcheck = data.email;
+    });
+
+    if(mailcheck === object.mail){
+        $.post("https://localhost:7180/Admin/Add",
+        {
+            email: object.mail,
+            password: object.pass,       
+        }).done(() => {
+            mailInput.value = '';
+            passwordInput.value = '';
+            checkImputMessage.classList.add('_ok');
+            checkImputMessage.innerText = 'Registrarion successful:';       
+        }).fail(() =>{
+            checkImputMessage.classList.add('_visible');
+            checkImputMessage.innerText = '!!! Server Error:';
+        });
+    }
+    else{
+        checkImputMessage.classList.remove('_ok');      
+        checkImputMessage.classList.add('_visible');
+        checkImputMessage.innerText = '!!! This email is already registered:';
+    }      
+
 };
 
 
