@@ -56,8 +56,7 @@ function validator(form, object){
         return false;
     }
     else{
-        checkImputMessage.classList.remove('_visible');
-        
+        checkImputMessage.classList.remove('_visible');      
     }
     
     if(!validateEmail(mailValue)){

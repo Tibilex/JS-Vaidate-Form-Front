@@ -82,8 +82,7 @@ function validator(form, object){
     {
         email: object.mail,
         password: object.pass,       
-    }).done(function(data){
-        alert("Successfully changed!");
+    }).done(function(){
         mailInput.value = '';
         passwordInput.value = '';
         checkImputMessage.classList.add('_ok');
