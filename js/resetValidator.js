@@ -1,5 +1,3 @@
-import {addUser} from './main.js'
-
 let resetForm = document.querySelector('#resetForm'),
     mailInput = document.querySelector('.input-mail'),
     checkboxInput = document.querySelector('.imput__checkbox'),
@@ -33,7 +31,7 @@ resetForm.addEventListener('submit', getSignUpFormValues);
 
 function validator(form, object){
     let mailValue = mailInput.value,
-        passValue = passwordInput.value,
+        passwordValue = passwordInput.value,
         formInputs = form.querySelectorAll('.input'),
         NullImputs = Array.from(formInputs).filter(input => input.value === ''); 
 
@@ -61,11 +59,22 @@ function validator(form, object){
     if(!validateEmail(mailValue)){
         mailInput.classList.add('_error');
         checkImputMessage.classList.add('_visible');
-        checkImputMessage.innerText = '!!! mail not valid:';
+        checkImputMessage.innerText = 'Mail not valid:';
         return false;
     }
     else{
         mailInput.classList.remove('_error');      
+        checkImputMessage.classList.remove('_visible');
+    }
+
+    if(passwordValue.length < 8){
+        passwordInput.classList.add('_error');
+        checkImputMessage.classList.add('_visible');
+        checkImputMessage.innerText = 'Invalid password: Minimum length 8:';
+        return false;
+    }
+    else{
+        passwordInput.classList.remove('_error');      
         checkImputMessage.classList.remove('_visible');
     }
 
@@ -81,6 +90,6 @@ function validator(form, object){
         checkImputMessage.innerText = 'Password reset successful:';
     }).fail(() =>{
         checkImputMessage.classList.add('_visible');
-        checkImputMessage.innerText = '!!! Server Error:';
+        checkImputMessage.innerText = 'Server Error:';
     });
 };

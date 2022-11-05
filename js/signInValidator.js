@@ -1,5 +1,3 @@
-import {addUser} from './main.js'
-
 let siqninForm = document.querySelector('#signinForm'),
     mailInput = document.querySelector('.input-mail'),
     checkboxInput = document.querySelector('.imput__checkbox'),
@@ -33,7 +31,6 @@ siqninForm.addEventListener('submit', getSignUpFormValues);
 
 function validator(form, object){
     let mailValue = mailInput.value,
-        passValue = passwordInput.value,
         formInputs = form.querySelectorAll('.input'),
         NullImputs = Array.from(formInputs).filter(input => input.value === ''); 
 
@@ -49,7 +46,7 @@ function validator(form, object){
     checkImputMessage.classList.remove('_ok');
 
     if(NullImputs.length !== 0){
-        checkImputMessage.innerText = '!!! not all fields are filled:';
+        checkImputMessage.innerText = 'Not all fields are filled:';
         checkImputMessage.classList.add('_visible');
         return false;
     }
@@ -78,7 +75,7 @@ function validator(form, object){
             if(object.pass !== data.password){
                 checkImputMessage.classList.remove('_ok');
                 checkImputMessage.classList.add('_visible');
-                checkImputMessage.innerText = '!!! Password incorect:';
+                checkImputMessage.innerText = 'Password incorect:';
             }
             else{              
                 mailInput.value = '';
@@ -90,7 +87,7 @@ function validator(form, object){
         }
         else{
             checkImputMessage.classList.add('_visible');
-            checkImputMessage.innerText = '!!! Mail incorect:';
+            checkImputMessage.innerText = 'Mail incorect:';
         }
     });
     

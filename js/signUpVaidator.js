@@ -1,11 +1,8 @@
-import {addUser} from './main.js'
-
 let siqnupForm = document.querySelector('#siqnupForm'),
     mailInput = document.querySelector('.input-mail'),
     checkboxInput = document.querySelector('.imput__checkbox'),
     checkImputMessage = document.querySelector('.imput__check'),
-    passwordInput = document.querySelector('.input-pass'),
-    mailcheck;
+    passwordInput = document.querySelector('.input-pass');
 
 //#region validation patterns
 
@@ -38,7 +35,7 @@ siqnupForm.addEventListener('submit', getSignUpFormValues);
 
 function validator(form, object){
     let mailValue = mailInput.value,
-        passValue = passwordInput.value,
+        passwordValue = passwordInput.value,
         formInputs = form.querySelectorAll('.input'),
         NullImputs = Array.from(formInputs).filter(input => input.value === ''); 
 
@@ -54,7 +51,7 @@ function validator(form, object){
     checkImputMessage.classList.remove('_ok');
 
     if(NullImputs.length !== 0){
-        checkImputMessage.innerText = '!!! not all fields are filled:';
+        checkImputMessage.innerText = 'Not all fields are filled:';
         checkImputMessage.classList.add('_visible');
         return false;
     }
@@ -74,6 +71,17 @@ function validator(form, object){
         checkImputMessage.classList.remove('_visible');
     }
 
+    if(passwordValue.length < 8){
+        passwordInput.classList.add('_error');
+        checkImputMessage.classList.add('_visible');
+        checkImputMessage.innerText = 'Invalid password: Minimum length 8:';
+        return false;
+    }
+    else{
+        passwordInput.classList.remove('_error');      
+        checkImputMessage.classList.remove('_visible');
+    }
+
     if(!checkboxInput.checked){
         checkboxInput.classList.add('_error');      
         return false; 
@@ -85,7 +93,7 @@ function validator(form, object){
     if(validateCountryRU(mailValue)){
         mailInput.classList.add('_error');      
         checkImputMessage.classList.add('_visible');
-        checkImputMessage.innerText = '!!! mail from this country is blocked:';
+        checkImputMessage.innerText = 'Mail from this country is blocked:';
         return false;
     }
     else{
@@ -95,34 +103,23 @@ function validator(form, object){
     checkImputMessage.classList.remove('_ok');
     checkImputMessage.classList.remove('_visible');
 
-    $.get("https://localhost:7180/Admin/GetToMail?mail=" + object.mail,{
-    }).done(function(data) {
-        mailcheck = data.email;
-    });
-
-    if(mailcheck === object.mail){
-        mailcheck = '';
-        $.post("https://localhost:7180/Admin/Add",
-        {
-            email: object.mail,
-            password: object.pass,       
-        }).done(() => {
-            mailInput.value = '';
-            passwordInput.value = '';
-            checkImputMessage.classList.add('_ok');
-            checkImputMessage.innerText = 'Registrarion successful:';       
-        }).fail(() =>{
-            checkImputMessage.classList.add('_visible');
-            checkImputMessage.innerText = '!!! Server Error:';
-        });
-    }
-    else{
+    $.post("https://localhost:7180/Admin/Add",
+    {
+        email: object.mail,
+        password: object.pass,       
+    }).done((data) => {
+        mailInput.value = '';
+        passwordInput.value = '';
+        checkImputMessage.classList.add('_ok');
+        checkImputMessage.innerText = data;            
+    }).fail(() =>{
         checkImputMessage.classList.remove('_ok');      
         checkImputMessage.classList.add('_visible');
-        checkImputMessage.innerText = '!!! This email is already registered:';
-    }      
+        checkImputMessage.innerText = 'Bad request:';
+    });
+};  
 
-};
+
 
 
 
