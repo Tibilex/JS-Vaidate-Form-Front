@@ -103,6 +103,12 @@ h3{
 .checkbox__label{
     color: $colorLightBrawn;
     user-select: none;
+    letter-spacing: 1px;
+}
+
+.imput__checkbox:checked + .checkbox__label{
+    color: $colorSalat;
+    transition: .3s;
 }
 
 .imput__checkbox._error + .checkbox__label {
@@ -175,6 +181,10 @@ h3{
     color: $colorSalat;
 }
 
+a:hover{
+    color: #fff;
+    transition: .5s;
+}
 .imput__forgot{
     color: $colorSalat;
     letter-spacing: 1px;

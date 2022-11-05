@@ -101,6 +101,12 @@ h3 {
      -moz-user-select: none;
       -ms-user-select: none;
           user-select: none;
+  letter-spacing: 1px;
+}
+
+.imput__checkbox:checked + .checkbox__label {
+  color: #8fbc8f;
+  transition: 0.3s;
 }
 
 .imput__checkbox._error + .checkbox__label {
@@ -173,6 +179,11 @@ h3 {
   margin: 0 0 0 5px;
   letter-spacing: 1px;
   color: #8fbc8f;
+}
+
+a:hover {
+  color: #fff;
+  transition: 0.5s;
 }
 
 .imput__forgot {
