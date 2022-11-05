@@ -69,17 +69,18 @@ function validator(form, object){
         checkImputMessage.classList.remove('_visible');
     }
 
-    if(!checkboxInput.checked){
-        checkboxInput.classList.add('_error');      
-        return false; 
-    }
-    else{
-        checkboxInput.classList.remove('_error');
-    }
-
-    addUser(object.mail, object.pass);
-    mailInput.value = '';
-    passwordInput.value = '';
-    checkImputMessage.classList.add('_ok');
-    checkImputMessage.innerText = 'Registrarion successful:';
+    $.post("https://localhost:7180/Admin/ChengePassword",
+    {
+        email: object.mail,
+        password: object.pass,       
+    }).done(function(data){
+        alert("Successfully changed!");
+        mailInput.value = '';
+        passwordInput.value = '';
+        checkImputMessage.classList.add('_ok');
+        checkImputMessage.innerText = 'Password reset successful:';
+    }).fail(() =>{
+        checkImputMessage.classList.add('_visible');
+        checkImputMessage.innerText = '!!! Server Error:';
+    });
 };

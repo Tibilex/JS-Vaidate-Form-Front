@@ -101,6 +101,7 @@ function validator(form, object){
     });
 
     if(mailcheck === object.mail){
+        mailcheck = '';
         $.post("https://localhost:7180/Admin/Add",
         {
             email: object.mail,
